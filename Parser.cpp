@@ -1,10 +1,10 @@
 #include "Parser.h"
 
-void Parser::parseCommand(std::string userCommand)
+void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool &shouldRun)
 {
     std::vector<std::string> tokens = tokenizer(userCommand);
     int commandLength = tokens.size();
-    if(tokens[0] == "f")
+    if(tokens[0] == "f") //Add flag to a line
     {
         if(commandLength == 2)
         {
@@ -21,16 +21,10 @@ void Parser::parseCommand(std::string userCommand)
                 return;
             }
             
-            if(lineNumber > 0 && lineNumber <= totalLines)
+            if(lineNumber > 0 && lineNumber <= logFileObject.getTotalLines())
             {
-                flagsIterator = std::find(flags.begin(), flags.end(), lineNumber);
-                if(flagsIterator == flags.end())
-                {
-                    flags.push_back(lineNumber);
-                    totalFlags++;
-                    displayFile();
-                }
-                else
+                int lineFlagged = logFileObject.flagLine(lineNumber);
+                if(!lineFlagged)
                 {
                     errorHandlerObject.throwError(602);
                     return;
@@ -49,7 +43,7 @@ void Parser::parseCommand(std::string userCommand)
         }
         return;
     }
-    if(tokens[0] == "rf")
+    if(tokens[0] == "rf") //Remove flag from a line
     {
         if(commandLength == 2)
         {
@@ -66,16 +60,10 @@ void Parser::parseCommand(std::string userCommand)
                 return;
             }
 
-            if(lineNumber > 0 && lineNumber <= totalLines)
+            if(lineNumber > 0 && lineNumber <= logFileObject.getTotalLines())
             {
-                flagsIterator = std::find(flags.begin(), flags.end(), lineNumber);
-                if(flagsIterator != flags.end())
-                {
-                    totalFlags--;
-                    flags.erase(flagsIterator);
-                    displayFile();
-                }
-                else
+                int lineUnFlagged = logFileObject.unFlagLine(lineNumber);
+                if(!lineUnFlagged)
                 {
                     errorHandlerObject.throwError(601);
                     return;
@@ -94,7 +82,7 @@ void Parser::parseCommand(std::string userCommand)
         }
         return;
     }
-    if(tokens[0] == "q")
+    if(tokens[0] == "q") //Quit
     {
         if(commandLength == 1)
         {
@@ -107,21 +95,32 @@ void Parser::parseCommand(std::string userCommand)
         }
         return;
     }
-    if(tokens[0] == "s")
+    if(tokens[0] == "s") //Search
     {
-        string searchString = "";
+        logFileObject.setSearchString("");
+        std::string tempString = "";
         if(commandLength > 1)
         {
-            for(int i = 0 ; i < tokens.size(); i++)
-            {
-                searchString += tokens[i] + " ";
-            }
+            // for(int i = 1 ; i < tokens.size(); i++)
+            // {
+            //     tempString += tokens[i] + " ";
+            // }
+            tempString += tokens[1];
+            logFileObject.setSearchString(tempString);
+            logFileObject.displayFile();
+            return;
         }
         else
         {
             errorHandlerObject.throwError(401);
             return;
         }
+    }
+    if(tokens[0] == "sc") //Clear search string
+    {
+        logFileObject.setSearchString("");
+        logFileObject.displayFile();
+        return;
     }
     errorHandlerObject.throwError(504);
 }
