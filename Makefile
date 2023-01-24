@@ -1,8 +1,8 @@
-urlogv: EntryPoint.o ErrorHandler.o LogFile.o Parser.o
-	g++ EntryPoint.o ErrorHandler.o  LogFile.o Parser.o -o urlogv
+urlogv: URLogV.o ErrorHandler.o LogFile.o Parser.o
+	g++ URLogV.o ErrorHandler.o LogFile.o Parser.o -o urlogv
 
-EntryPoint.o: EntryPoint.cpp
-	g++ -c EntryPoint.cpp
+URLogV.o: URLogV.cpp
+	g++ -c URLogV.cpp
 
 ErrorHandler.o: ErrorHandler.cpp
 	g++ -c ErrorHandler.cpp

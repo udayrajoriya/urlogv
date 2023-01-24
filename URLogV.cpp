@@ -1,7 +1,17 @@
-#include <iostream>
-#include "ErrorHandler.cpp"
+#include "ErrorHandler.h"
+#include "LogFile.h"
+#include "Parser.h"
+
+void startProcess();
+
+bool shouldRun = true;
 
 ErrorHandler errorHandlerObject;
+
+LogFile logFileObject;
+
+Parser parserObject;
+
 int main(int argc, char** argv)
 {
     if(argc > 1)
@@ -9,7 +19,6 @@ int main(int argc, char** argv)
         std::string argument = argv[1];
         switch(argc)
         {
-            
             case 2:
                 if(argument[0] == '-')
                 {
@@ -21,6 +30,10 @@ int main(int argc, char** argv)
                     {
                         errorHandlerObject.throwError(405);
                     }
+                }
+                else
+                {
+                    startProcess();
                 }
                 break;
 
@@ -34,4 +47,18 @@ int main(int argc, char** argv)
         errorHandlerObject.throwError(402);
     }
     return 0;
+}
+
+void startProcess()
+{
+    std::string userCommand;
+    logFileObject.unloadFile();
+    logFileObject.displayFile();
+    logFileObject.setTotalLines(logFileObject.getTotalLines());
+    while(shouldRun)
+    {
+        std::cout<<":";
+        getline(std::cin, userCommand);
+        parserObject.parseCommand(userCommand, logFileObject, shouldRun);
+    }
 }
