@@ -1,8 +1,8 @@
 #include "LogFile.h"
 
-void LogFile::unloadFile()
+void LogFile::unloadFile(char* filePath)
 {
-    logFile.open("logs.log");
+    logFile.open(filePath);
     std::string logLine;
     totalLines = 0;
     while (std::getline (logFile, logLine))
@@ -26,13 +26,20 @@ void LogFile::displayFile()
         {
             std::size_t found = logLine.find(searchString);
             if(found != std::string::npos)
-                std::cout<<(i+1)<<"\t"<< logLine<<std::endl;
+                displayLine(i, logLine);
         }
         else
         {
-            if(totalFlags > 0)
+            displayLine(i, logLine);
+        }
+    }
+}
+
+void LogFile::displayLine(int lineNumber, std::string logLine)
+{
+    if(totalFlags > 0)
             {
-                flagsIterator = std::find(flags.begin(), flags.end(), (i+1));
+                flagsIterator = std::find(flags.begin(), flags.end(), (lineNumber+1));
                 if(flagsIterator != flags.end())
                 {
                     std::cout<<"* ";
@@ -43,9 +50,7 @@ void LogFile::displayFile()
                 }
                 
             }
-            std::cout<<(i+1)<<"\t"<< logLine<<std::endl;
-        }
-    }
+            std::cout<<(lineNumber+1)<<"\t"<< logLine<<std::endl;
 }
 
 long long int LogFile::getTotalLines()

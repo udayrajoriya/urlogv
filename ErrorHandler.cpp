@@ -13,11 +13,11 @@ void ErrorHandler::throwError(int errorCode)
             break;
 
         case 403:
-            std::cout<<"ERROR "<<errorCode<<": Invalid number of arguments passed. Please run urlogv -help for usage instructions."<<std::endl;
+            std::cout<<"ERROR "<<errorCode<<": Invalid number of arguments passed. Please run urlogv -h for usage instructions."<<std::endl;
             break;
 
         case 405:
-            std::cout<<"ERROR "<<errorCode<<": Invalid option. Please run urlogv -help for usage instructions."<<std::endl;
+            std::cout<<"ERROR "<<errorCode<<": Invalid option. Please run urlogv -h for usage instructions."<<std::endl;
             break;
 
         case 504:

@@ -2,7 +2,7 @@
 #include "LogFile.h"
 #include "Parser.h"
 
-void startProcess();
+void startProcess(char* filePath);
 
 bool shouldRun = true;
 
@@ -22,7 +22,7 @@ int main(int argc, char** argv)
             case 2:
                 if(argument[0] == '-')
                 {
-                    if(argument == "-help")
+                    if(argument == "-h")
                     {
                         std::cout<<"This section is still under implementation."<<std::endl;
                     }
@@ -33,7 +33,7 @@ int main(int argc, char** argv)
                 }
                 else
                 {
-                    startProcess();
+                    startProcess(argv[1]);
                 }
                 break;
 
@@ -49,10 +49,10 @@ int main(int argc, char** argv)
     return 0;
 }
 
-void startProcess()
+void startProcess(char* filePath)
 {
     std::string userCommand;
-    logFileObject.unloadFile();
+    logFileObject.unloadFile(filePath);
     logFileObject.displayFile();
     logFileObject.setTotalLines(logFileObject.getTotalLines());
     while(shouldRun)

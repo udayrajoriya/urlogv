@@ -18,7 +18,7 @@ std::vector<long long int> flags;
 std::vector<long long int>::iterator flagsIterator;
 
     public:
-        void unloadFile();
+        void unloadFile(char* filePath);
         void displayFile();
 
         long long int getTotalLines();
@@ -32,4 +32,6 @@ std::vector<long long int>::iterator flagsIterator;
 
         int flagLine(int);
         int unFlagLine(int);
+
+        void displayLine(int, std::string);
 };
