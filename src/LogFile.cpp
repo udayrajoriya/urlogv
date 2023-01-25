@@ -1,4 +1,4 @@
-#include "LogFile.h"
+#include "../include/LogFile.h"
 
 void LogFile::unloadFile(char* filePath)
 {

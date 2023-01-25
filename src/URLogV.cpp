@@ -1,6 +1,6 @@
-#include "ErrorHandler.h"
-#include "LogFile.h"
-#include "Parser.h"
+#include "../include/ErrorHandler.h"
+#include "../include/LogFile.h"
+#include "../include/Parser.h"
 
 void startProcess(char* filePath);
 

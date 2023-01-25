@@ -1,17 +1,18 @@
 urlogv: URLogV.o ErrorHandler.o LogFile.o Parser.o
-	g++ URLogV.o ErrorHandler.o LogFile.o Parser.o -o urlogv
+	mkdir -p bin
+	g++ obj/URLogV.o obj/ErrorHandler.o obj/LogFile.o obj/Parser.o -o bin/urlogv
 
-URLogV.o: URLogV.cpp
-	g++ -c URLogV.cpp
+URLogV.o: src/URLogV.cpp
+	g++ -c src/URLogV.cpp -o obj/URLogV.o
 
-ErrorHandler.o: ErrorHandler.cpp
-	g++ -c ErrorHandler.cpp
+ErrorHandler.o: src/ErrorHandler.cpp
+	g++ -c src/ErrorHandler.cpp -o obj/ErrorHandler.o
 
-LogFile.o: LogFile.cpp
-	g++ -c LogFile.cpp
+LogFile.o: src/LogFile.cpp
+	g++ -c src/LogFile.cpp -o obj/LogFile.o
 
-Parser.o: Parser.cpp
-	g++ -c Parser.cpp
+Parser.o: src/Parser.cpp
+	g++ -c src/Parser.cpp -o obj/Parser.o
 
 clean:
-	rm *.o urlogv
+	rm obj/*.o bin/urlogv

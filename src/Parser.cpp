@@ -1,4 +1,4 @@
-#include "Parser.h"
+#include "../include/Parser.h"
 
 void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool &shouldRun)
 {

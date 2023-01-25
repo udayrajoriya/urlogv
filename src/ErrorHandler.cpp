@@ -1,4 +1,4 @@
-#include "ErrorHandler.h"
+#include "../include/ErrorHandler.h"
 
 void ErrorHandler::throwError(int errorCode)
 {
