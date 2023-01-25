@@ -16,4 +16,4 @@ Parser.o: src/Parser.cpp
 	g++ -c src/Parser.cpp -o obj/Parser.o
 
 clean:
-	rm obj/*.o bin/urlogv
+	rm -rf obj bin
