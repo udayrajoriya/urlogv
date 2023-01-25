@@ -2,3 +2,5 @@
 .vscode
 urlogv
 *.log
+obj
+bin
