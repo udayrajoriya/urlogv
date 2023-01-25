@@ -4,16 +4,13 @@ UR Log Viewer is a small command line tool for viewing log files.
 ## Building from Source
 1. Clone this repository.
 2. Run "make"
-
 ## Installation
 To be added
-
 ## Usage
 To open a log file
 ```
 urlogv logfile.log
 ```
-
 ## Options
 While inside of URLogV, run the following user commands
 ### To flag a line:
