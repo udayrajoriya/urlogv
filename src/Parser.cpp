@@ -97,15 +97,23 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
     }
     if(tokens[0] == "s") //Search
     {
+        bool foundCmd = false;
         logFileObject.setSearchString("");
         std::string tempString = "";
         if(commandLength > 1)
         {
-            // for(int i = 1 ; i < tokens.size(); i++)
-            // {
-            //     tempString += tokens[i] + " ";
-            // }
-            tempString += tokens[1];
+            for(int i = 0; i < userCommand.length(); i++)
+            {
+                if(userCommand[i] == 's' && foundCmd == false)
+                {
+                    foundCmd = true;
+                    i++;
+                }
+                else
+                {
+                    tempString += userCommand[i];
+                }
+            }
             logFileObject.setSearchString(tempString);
             logFileObject.displayFile();
             return;
