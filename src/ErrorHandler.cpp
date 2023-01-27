@@ -9,7 +9,7 @@ void ErrorHandler::throwError(int errorCode)
             break;
 
         case 402:
-            std::cout<<"ERROR "<<errorCode<<": No log file mentioned. Please run urlogv -help for usage instructions."<<std::endl;
+            std::cout<<"ERROR "<<errorCode<<": Filename missing. Please use \"urlogv -h\" to get usage instructions."<<std::endl;
             break;
 
         case 403:

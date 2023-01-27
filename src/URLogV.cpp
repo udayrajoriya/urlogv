@@ -24,7 +24,16 @@ int main(int argc, char** argv)
                 {
                     if(argument == "-h")
                     {
-                        std::cout<<"This section is still under implementation."<<std::endl;
+                        std::cout<<"Usage: urlogv <path of file>"<<std::endl;
+                        std::cout<<"Commands:"<<std::endl;
+                        std::cout<<"  f <line number>"<<"              To flag a line. Example: f 256"<<std::endl;
+                        std::cout<<"  q"<<"                            To exit the program. Example: q"<<std::endl;
+                        std::cout<<"  rf <line number>"<<"             To remove flag of a line. Example: rf 115"<<std::endl;
+                        std::cout<<"  s <text or string to search>"<<" To search for some text or string. Example: s Generating report"<<std::endl;
+                        std::cout<<"  sc"<<"                           To clear a search. Example: sc"<<std::endl;
+                        std::cout<<std::endl;
+                        std::cout<<"URLogV: developed by Uday Rajoriya."<<std::endl;
+                        std::cout<<"Report any issues or bugs to hello@udayrajoriya.com."<<std::endl;
                     }
                     else
                     {
