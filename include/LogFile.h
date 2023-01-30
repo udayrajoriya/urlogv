@@ -12,10 +12,12 @@ class LogFile
         std::vector<std::string> logFileContents;
         long long int totalLines = 0;
         long long int totalFlags = 0;
+        long long int fromLine = 0;
+        long long int toLine = 0;
         std::string searchString = "";
 
-std::vector<long long int> flags;
-std::vector<long long int>::iterator flagsIterator;
+        std::vector<long long int> flags;
+        std::vector<long long int>::iterator flagsIterator;
 
     public:
         void unloadFile(char* filePath);
@@ -26,6 +28,12 @@ std::vector<long long int>::iterator flagsIterator;
 
         long long int getTotalFlags();
         void setTotalFlags(long long int);
+
+        long long int getFromLine();
+        void setFromLine(long long int);
+
+        long long int getToLine();
+        void setToLine(long long int);
 
         std::string getSearchString();
         void setSearchString(std::string);

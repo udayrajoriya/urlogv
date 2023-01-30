@@ -82,6 +82,44 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
         }
         return;
     }
+    if(tokens[0] == "vr") //View lines only in range
+    {
+        if(commandLength == 3)
+        {
+            long long int fromLine;
+            long long int toLine;
+            try
+            {
+                fromLine = stoi(tokens[1]);
+                toLine = stoi(tokens[2]);
+                if(fromLine == 0 || toLine == 0)
+                    throw 505;
+            }
+            catch(...)
+            {
+                errorHandlerObject.throwError(604);
+                return;
+            }
+
+            if((fromLine > 0 && fromLine <= logFileObject.getTotalLines()) && (toLine > 0 && toLine <= logFileObject.getTotalLines()) && (fromLine < toLine))
+            {
+                logFileObject.setFromLine(fromLine);
+                logFileObject.setToLine(toLine);
+                logFileObject.displayFile();
+            }
+            else
+            {
+                errorHandlerObject.throwError(604);
+                return;
+            }
+        }
+        else
+        {
+            errorHandlerObject.throwError(401);
+            return;
+        }
+        return;
+    }
     if(tokens[0] == "q") //Quit
     {
         if(commandLength == 1)

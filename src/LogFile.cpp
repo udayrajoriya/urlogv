@@ -38,6 +38,10 @@ void LogFile::displayFile()
 void LogFile::displayLine(int lineNumber, std::string logLine)
 {
     if(totalFlags > 0)
+    {
+        if(fromLine != 0 && toLine != 0)
+        {
+            if((lineNumber+1) >= fromLine && (lineNumber+1) <= toLine)
             {
                 flagsIterator = std::find(flags.begin(), flags.end(), (lineNumber+1));
                 if(flagsIterator != flags.end())
@@ -48,9 +52,32 @@ void LogFile::displayLine(int lineNumber, std::string logLine)
                 {
                     std::cout<<"  ";
                 }
-                
             }
+        }
+        else
+        {
+            flagsIterator = std::find(flags.begin(), flags.end(), (lineNumber+1));
+            if(flagsIterator != flags.end())
+            {
+                std::cout<<"* ";
+            }
+            else
+            {
+                std::cout<<"  ";
+            }
+        }
+    }
+    if(fromLine != 0 && toLine != 0)
+    {
+        if((lineNumber+1) >= fromLine && (lineNumber+1) <= toLine)
+        {
             std::cout<<(lineNumber+1)<<"\t"<< logLine<<std::endl;
+        }
+    }
+    else
+    {
+        std::cout<<(lineNumber+1)<<"\t"<< logLine<<std::endl;
+    }
 }
 
 long long int LogFile::getTotalLines()
@@ -61,6 +88,26 @@ long long int LogFile::getTotalLines()
 void LogFile::setTotalLines(long long int receivedLines)
 {
     totalLines = receivedLines;
+}
+
+long long int LogFile::getFromLine()
+{
+    return fromLine;
+}
+
+void LogFile::setFromLine(long long int receivedLine)
+{
+    fromLine = receivedLine;
+}
+
+long long int LogFile::getToLine()
+{
+    return toLine;
+}
+
+void LogFile::setToLine(long long int receivedLine)
+{
+    toLine = receivedLine;
 }
 
 long long int LogFile::getTotalFlags()

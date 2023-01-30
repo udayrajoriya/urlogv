@@ -33,5 +33,8 @@ void ErrorHandler::throwError(int errorCode)
         case 603:
             std::cout<<"ERROR "<<errorCode<<": Invalid Line Number."<<std::endl;
             break;
+        case 604:
+            std::cout<<"ERROR "<<errorCode<<": Invalid Range of Line Numbers."<<std::endl;
+            break;
     }
 }
