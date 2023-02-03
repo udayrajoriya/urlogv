@@ -152,6 +152,8 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
                     tempString += userCommand[i];
                 }
             }
+            logFileObject.setFromLine(0);
+            logFileObject.setToLine(0);
             logFileObject.setSearchString(tempString);
             logFileObject.displayFile();
             return;
