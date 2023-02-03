@@ -5,36 +5,44 @@ void ErrorHandler::throwError(int errorCode)
     switch(errorCode)
     {
         case 401:
-            std::cout<<"ERROR "<<errorCode<<": Invalid number of parameters."<<std::endl;
+            printError(errorCode, "Invalid number of parameters.");
             break;
 
         case 402:
-            std::cout<<"ERROR "<<errorCode<<": Filename missing. Please use \"urlogv -h\" to get usage instructions."<<std::endl;
+            printError(errorCode, ": Filename missing. Please use \"urlogv -h\" to get usage instructions.");
             break;
 
         case 403:
-            std::cout<<"ERROR "<<errorCode<<": Invalid number of arguments passed. Please run urlogv -h for usage instructions."<<std::endl;
+            printError(errorCode, "Invalid number of arguments passed. Please run urlogv -h for usage instructions.");
             break;
 
         case 405:
-            std::cout<<"ERROR "<<errorCode<<": Invalid option. Please run urlogv -h for usage instructions."<<std::endl;
+            printError(errorCode, "Invalid option. Please run urlogv -h for usage instructions.");
             break;
 
         case 504:
-            std::cout<<"ERROR "<<errorCode<<": Command not found."<<std::endl;
+            printError(errorCode, "Command not found.");
             break;
         
         case 601:
-            std::cout<<"ERROR "<<errorCode<<": Line is not flagged."<<std::endl;
+            printError(errorCode, "Line is not flagged.");
             break;
+
         case 602:
-            std::cout<<"ERROR "<<errorCode<<": Line already flagged."<<std::endl;
+            printError(errorCode, "Line already flagged.");
             break;
+
         case 603:
-            std::cout<<"ERROR "<<errorCode<<": Invalid Line Number."<<std::endl;
+            printError(errorCode, "Invalid Line Number.");
             break;
+            
         case 604:
-            std::cout<<"ERROR "<<errorCode<<": Invalid Range of Line Numbers."<<std::endl;
+            printError(errorCode, "Invalid Range of Line Numbers.");
             break;
     }
+}
+
+void ErrorHandler::printError(int errorCode, std::string errorMessage)
+{
+    std::cout<<"ERROR "<<errorCode<<": "<<errorMessage<<std::endl;
 }
