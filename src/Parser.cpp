@@ -27,19 +27,16 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
                 if(!lineFlagged)
                 {
                     errorHandlerObject.throwError(602);
-                    return;
                 }
             }
             else
             {
                 errorHandlerObject.throwError(603);
-                return;
             }
         }
         else
         {
             errorHandlerObject.throwError(401);
-            return;
         }
         return;
     }
@@ -66,19 +63,16 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
                 if(!lineUnFlagged)
                 {
                     errorHandlerObject.throwError(601);
-                    return;
                 }
             }
             else
             {
                 errorHandlerObject.throwError(603);
-                return;
             }
         }
         else
         {
             errorHandlerObject.throwError(401);
-            return;
         }
         return;
     }
@@ -110,13 +104,26 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
             else
             {
                 errorHandlerObject.throwError(604);
-                return;
             }
         }
         else
         {
             errorHandlerObject.throwError(401);
-            return;
+        }
+        return;
+    }
+    if(tokens[0] == "va") //View all lines
+    {
+        if(commandLength == 1)
+        {
+            logFileObject.setSearchString("");
+            logFileObject.setFromLine(0);
+            logFileObject.setToLine(0);
+            logFileObject.displayFile();
+        }
+        else
+        {
+            errorHandlerObject.throwError(401);
         }
         return;
     }
@@ -129,7 +136,6 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
         else
         {
             errorHandlerObject.throwError(401);
-            return;
         }
         return;
     }
@@ -166,8 +172,15 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
     }
     if(tokens[0] == "sc") //Clear search string
     {
-        logFileObject.setSearchString("");
-        logFileObject.displayFile();
+        if(commandLength == 1)
+        {
+            logFileObject.setSearchString("");
+            logFileObject.displayFile();
+        }
+        else
+        {
+            errorHandlerObject.throwError(401);
+        }
         return;
     }
     errorHandlerObject.throwError(504);
