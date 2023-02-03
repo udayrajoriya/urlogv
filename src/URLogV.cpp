@@ -31,6 +31,7 @@ int main(int argc, char** argv)
                         std::cout<<"  rf <line number>"<<"             To remove flag of a line. Example: rf 115"<<std::endl;
                         std::cout<<"  s <text or string to search>"<<" To search for some text or string. Example: s Generating report"<<std::endl;
                         std::cout<<"  sc"<<"                           To clear a search. Example: sc"<<std::endl;
+                        std::cout<<"  va"<<"                           To view all lines from file. Example: va"<<std::endl;
                         std::cout<<"  vr <from line> <to line>"<<"     To view lines having line number in range. Example: vr 215 232"<<std::endl;
                         std::cout<<std::endl;
                         std::cout<<"URLogV: developed by Uday Rajoriya."<<std::endl;

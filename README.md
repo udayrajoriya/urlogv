@@ -17,7 +17,7 @@ To open a log file
 urlogv logfile.log
 ```
 
-## Options
+## Commands
 While inside of URLogV, run the following user commands
 ### To flag a line:
 ```
@@ -34,6 +34,14 @@ While inside of URLogV, run the following user commands
 ### To remove search filtering:
 ```
 :sc //Example: sc
+```
+### To view lines only in a particular range of line numbers:
+```
+:vr <from_line_number> <to_line_number> //Example: vr 125 135
+```
+### To view all lines/clear the view range(vr) filter:
+```
+:va //Example: va
 ```
 ### To exit URLogV:
 ```
