@@ -99,6 +99,7 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
             {
                 logFileObject.setFromLine(fromLine);
                 logFileObject.setToLine(toLine);
+                logFileObject.setSearchString("");
                 logFileObject.displayFile();
             }
             else
