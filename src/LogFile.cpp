@@ -15,12 +15,10 @@ void LogFile::unloadFile(char* filePath)
 
 void LogFile::displayFile()
 {
-    long long int lineCounter = 0;
     std::string logLine;
 
     for(long long int i = 0 ; i < logFileContents.size(); i++)
     {
-        lineCounter++;
         logLine = logFileContents[i];
         if(searchString != "")
         {
