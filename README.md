@@ -19,6 +19,14 @@ urlogv logfile.log
 
 ## Commands
 While inside of URLogV, run the following user commands
+### To move to the next page:
+```
+:n //Example: n
+```
+### To move to the previous page:
+```
+:p //Example: p
+```
 ### To flag a line:
 ```
 :f <line_number> //Example: f 25

@@ -27,6 +27,8 @@ int main(int argc, char** argv)
                         std::cout<<"Usage: urlogv <path of file>"<<std::endl;
                         std::cout<<"Commands:"<<std::endl;
                         std::cout<<"  f <line number>"<<"              To flag a line. Example: f 256"<<std::endl;
+                        std::cout<<"  n"<<"                            To move to the next page. Example: n"<<std::endl;
+                        std::cout<<"  p"<<"                            To move to the previous page. Example: p"<<std::endl;
                         std::cout<<"  q"<<"                            To exit the program. Example: q"<<std::endl;
                         std::cout<<"  rf <line number>"<<"             To remove flag of a line. Example: rf 115"<<std::endl;
                         std::cout<<"  s <text or string to search>"<<" To search for some text or string. Example: s Generating report"<<std::endl;
