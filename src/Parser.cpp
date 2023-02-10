@@ -100,6 +100,7 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
                 logFileObject.setFromLine(fromLine);
                 logFileObject.setToLine(toLine);
                 logFileObject.setSearchString("");
+                logFileObject.setLastLineViewed(fromLine-2);
                 logFileObject.displayFile();
             }
             else
@@ -120,6 +121,7 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
             logFileObject.setSearchString("");
             logFileObject.setFromLine(0);
             logFileObject.setToLine(0);
+            logFileObject.resetPagination();
             logFileObject.displayFile();
         }
         else
@@ -162,7 +164,9 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
             logFileObject.setFromLine(0);
             logFileObject.setToLine(0);
             logFileObject.setSearchString(tempString);
-            logFileObject.displayFile();
+            logFileObject.setLastLineViewed(-1);
+            logFileObject.searchFile();
+            logFileObject.viewSearchResults();
             return;
         }
         else
@@ -176,7 +180,40 @@ void Parser::parseCommand(std::string userCommand, LogFile &logFileObject, bool 
         if(commandLength == 1)
         {
             logFileObject.setSearchString("");
+            logFileObject.resetPagination();
             logFileObject.displayFile();
+        }
+        else
+        {
+            errorHandlerObject.throwError(401);
+        }
+        return;
+    }
+    if(tokens[0] == "n") //Quit
+    {
+        if(commandLength == 1)
+        {
+            if(logFileObject.getSearchString() == "")
+                logFileObject.displayFile();
+            else
+                logFileObject.viewSearchResults();
+        }
+        else
+        {
+            errorHandlerObject.throwError(401);
+        }
+        return;
+    }
+    if(tokens[0] == "p") //Quit
+    {
+        if(commandLength == 1)
+        {
+            logFileObject.setPreviousPage();
+            
+            if(logFileObject.getSearchString() == "")
+                logFileObject.displayFile();
+            else
+                logFileObject.viewSearchResults();
         }
         else
         {

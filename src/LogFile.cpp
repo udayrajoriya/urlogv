@@ -13,10 +13,11 @@ void LogFile::unloadFile(char* filePath)
     logFile.close();
 }
 
-void LogFile::displayFile()
+void LogFile::searchFile()
 {
     std::string logLine;
-
+    searchResults.clear();
+    searchLineNo.clear();
     for(long long int i = 0 ; i < logFileContents.size(); i++)
     {
         logLine = logFileContents[i];
@@ -24,11 +25,99 @@ void LogFile::displayFile()
         {
             std::size_t found = logLine.find(searchString);
             if(found != std::string::npos)
-                displayLine(i, logLine);
+            {
+                searchResults.push_back(logLine);
+                searchLineNo.push_back(i);
+            }
+                
+        }
+    }
+}
+
+void LogFile::updateFirstLine()
+{
+    long long int lengthToCover = 0;
+    if(searchString == "")
+    {
+        lengthToCover = logFileContents.size()-1;
+    }
+    else
+    {
+        lengthToCover = searchResults.size()-1;
+    }
+    if(lastLineViewed < (lengthToCover))
+    {
+        if(fromLine == 0 && toLine == 0)
+        {
+            long long int tempLine = lastLineViewed + 1;
+            if(tempLine < lengthToCover)
+            {
+                pageFirstLine = tempLine;
+            }
         }
         else
         {
+            if((lastLineViewed + 1) < toLine)
+            {
+                if((lastLineViewed + 1) >= fromLine)
+                {
+                    pageFirstLine = lastLineViewed + 1;
+                }
+                else
+                {
+                    lastLineViewed = fromLine - 2;
+                    pageFirstLine = lastLineViewed + 1;
+                }
+            }
+        }
+    }
+    else
+    {
+        if(lastLineViewed == -1)
+        {
+            pageFirstLine = 0;
+        }
+    }
+}
+
+void LogFile::viewSearchResults()
+{
+    std::string logLine;
+    long long int logLineNo;
+    linesViewed = 0;
+    updateFirstLine();
+    for(long long int i = pageFirstLine ; i < searchResults.size(); i++)
+    {
+        if(linesViewed < linesPerPage)
+        {
+            lastLineViewed = i;
+            logLine = searchResults[i];
+            logLineNo = searchLineNo[i];
+            displayLine(logLineNo, logLine);
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+void LogFile::displayFile()
+{
+    std::string logLine;
+    linesViewed = 0;
+    updateFirstLine();
+    for(long long int i = pageFirstLine ; i < logFileContents.size(); i++)
+    {
+        if(linesViewed < linesPerPage)
+        {
+            lastLineViewed = i;
+            logLine = logFileContents[i];
             displayLine(i, logLine);
+        }
+        else
+        {
+            break;
         }
     }
 }
@@ -76,6 +165,7 @@ void LogFile::displayLine(int lineNumber, std::string logLine)
     {
         std::cout<<(lineNumber+1)<<"\t"<< logLine<<std::endl;
     }
+    linesViewed++;
 }
 
 long long int LogFile::getTotalLines()
@@ -126,6 +216,12 @@ std::string LogFile::getSearchString()
 void LogFile::setSearchString(std::string incomingSearchString)
 {
     searchString = incomingSearchString;
+
+    if(incomingSearchString == "")
+    {
+        searchResults.clear();
+        searchLineNo.clear();
+    }
 }
 
 int LogFile::flagLine(int lineNumber)
@@ -158,4 +254,41 @@ int LogFile::unFlagLine(int lineNumber)
         return 0;
     }
     return 1;
+}
+
+void LogFile::setPreviousPage()
+{
+    lastLineViewed = pageFirstLine - linesPerPage - 1;
+    if(fromLine == 0 && toLine == 0)
+    {
+        
+    }
+    else
+    {
+        if((lastLineViewed + 1) >= fromLine)
+        {
+            pageFirstLine = lastLineViewed;
+        }
+        else
+        {
+            lastLineViewed = fromLine - 2;
+            pageFirstLine = lastLineViewed + 1;
+        }
+    }
+    
+    if(lastLineViewed < 0)
+    {
+        lastLineViewed = -1;
+    }
+}
+
+void LogFile::setLastLineViewed(long long int lineNo)
+{
+    lastLineViewed = lineNo;
+}
+
+void LogFile::resetPagination()
+{
+    lastLineViewed = -1;
+    pageFirstLine = 0;
 }
